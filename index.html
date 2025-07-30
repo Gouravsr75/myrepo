@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2>😎😎</h2>
+  <button onclick="logout()" id="logoutBtn">Logout</button>
+  <ul id="messages"></ul>
+
+  <form id="form">
+    <input id="input" autocomplete="off" placeholder="Type a message..." />
+    <button>Send</button>
+  </form>
+
+  <!-- Lock Screen -->
+  <div id="lockScreen">
+    <div id="lockBox">
+      <h3>Enter Password</h3>
+      <input type="password" id="lockPassword" placeholder="Password">
+      <button onclick="unlock()">Unlock</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
