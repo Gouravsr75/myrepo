@@ -3,34 +3,17 @@ const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
 
-// Assign role (user1 or user2) on first visit
-let role = localStorage.getItem('chatRole');
-if (!role) {
-  role = Math.random() < 0.5 ? 'user1' : 'user2';
-  localStorage.setItem('chatRole', role);
-}
-
-// Submit message
-form.addEventListener('submit', function (e) {
+form.addEventListener('submit', function(e) {
   e.preventDefault();
   if (input.value) {
-    socket.emit('chat message', { text: input.value, role: role });
+    socket.emit('chat message', input.value);
     input.value = '';
   }
 });
 
-// Display incoming message
-socket.on('chat message', function (data) {
+socket.on('chat message', function(msg) {
   const item = document.createElement('li');
-  item.textContent = data.text;
-
-  // Apply style based on who sent the message
-  if (data.role === role) {
-    item.classList.add('me');
-  } else {
-    item.classList.add('other');
-  }
-
+  item.textContent = msg;
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
@@ -61,8 +44,7 @@ window.onload = () => {
     document.getElementById("lockScreen").style.display = "none";
   }
 };
-
-// Auto-refresh every 30 seconds
+// Auto-refresh page every 30 seconds (30,000 milliseconds)
 setTimeout(() => {
   location.reload();
-}, 30000);
+}, 30000); // 30 seconds
