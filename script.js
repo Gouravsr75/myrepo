@@ -47,4 +47,4 @@ window.onload = () => {
 // Auto-refresh page every 2 minutes (120,000 milliseconds)
 setTimeout(() => {
   location.reload();
-}, 120000); // 2 minutes
+}, 60000); // 2 minutes
