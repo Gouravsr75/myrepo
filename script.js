@@ -44,3 +44,7 @@ window.onload = () => {
     document.getElementById("lockScreen").style.display = "none";
   }
 };
+// Auto-refresh page every 2 minutes (120,000 milliseconds)
+setTimeout(() => {
+  location.reload();
+}, 120000); // 2 minutes
