@@ -1,3 +1,20 @@
+/* Your own messages */
+.me {
+  background-color: #cce5ff;
+  text-align: right;
+  border-left: 4px solid #007bff;
+}
+
+/* Messages from the other person */
+.other {
+  background-color: #d4edda;
+  text-align: left;
+  border-left: 4px solid #28a745;
+}
+
+
+
+
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
