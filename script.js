@@ -3,17 +3,34 @@ const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
 
-form.addEventListener('submit', function(e) {
+// Assign role (user1 or user2) on first visit
+let role = localStorage.getItem('chatRole');
+if (!role) {
+  role = Math.random() < 0.5 ? 'user1' : 'user2';
+  localStorage.setItem('chatRole', role);
+}
+
+// Submit message
+form.addEventListener('submit', function (e) {
   e.preventDefault();
   if (input.value) {
-    socket.emit('chat message', input.value);
+    socket.emit('chat message', { text: input.value, role: role });
     input.value = '';
   }
 });
 
-socket.on('chat message', function(msg) {
+// Display incoming message
+socket.on('chat message', function (data) {
   const item = document.createElement('li');
-  item.textContent = msg;
+  item.textContent = data.text;
+
+  // Apply style based on who sent the message
+  if (data.role === role) {
+    item.classList.add('me');
+  } else {
+    item.classList.add('other');
+  }
+
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
@@ -44,7 +61,8 @@ window.onload = () => {
     document.getElementById("lockScreen").style.display = "none";
   }
 };
-// Auto-refresh page every 30 seconds (30,000 milliseconds)
+
+// Auto-refresh every 30 seconds
 setTimeout(() => {
   location.reload();
-}, 30000); // 30 seconds
+}, 30000);
